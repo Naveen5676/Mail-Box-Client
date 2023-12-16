@@ -21,6 +21,7 @@ const ComposeForm = () => {
 
     e.preventDefault();
     let data = {
+      sentfromemail: localStorage.getItem("loginemail"),
       email: sentemail.current.value,
       subject: subject.current.value,
       message: message,
@@ -40,6 +41,26 @@ const ComposeForm = () => {
       .then((res) => {
         if (!res.ok) {
           throw new Error("error while sending data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    let receivedemail = sentemail.current.value.replace(/[@.]/g, "");
+    fetch(
+      `https://expensetracker-9c3dc-default-rtdb.firebaseio.com/received/${receivedemail}.json`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    )
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("error");
         }
       })
       .catch((err) => {
