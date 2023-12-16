@@ -41,6 +41,12 @@ const AuthPage = () => {
           } else {
             throw new Error("error while login");
           }
+          return res.json();
+        })
+        .then((data) => {
+          let sentemail = data.email;
+          let updatedemail = sentemail.replace(/[@.]/g, "");
+          localStorage.setItem("loginemail", updatedemail);
         })
         .catch((err) => {
           console.log(err);
