@@ -25,6 +25,7 @@ const ComposeForm = () => {
       email: sentemail.current.value,
       subject: subject.current.value,
       message: message,
+      messageread: false,
     };
 
     const sendingemail = localStorage.getItem("loginemail");
