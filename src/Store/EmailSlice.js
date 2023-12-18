@@ -29,6 +29,12 @@ const EmailSlice = createSlice({
 
       // Increment the unread count for each item with messageread: true
     },
+    deleteemail(state, action) {
+      // Use filter to create a new array excluding the item to be deleted
+      state.receivedemaildata = state.receivedemaildata.filter(
+        (item) => item.id !== action.payload
+      );
+    },
   },
 });
 
