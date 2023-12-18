@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { receivedemaildata: [], unread: 0 };
+const initialState = { receivedemaildata: [], unread: 0 , sentemaildata:[]};
 const EmailSlice = createSlice({
   name: "email",
   initialState: initialState,
@@ -29,12 +29,20 @@ const EmailSlice = createSlice({
 
       // Increment the unread count for each item with messageread: true
     },
-    deleteemail(state, action) {
+    deleteereceivedmail(state, action) {
       // Use filter to create a new array excluding the item to be deleted
       state.receivedemaildata = state.receivedemaildata.filter(
         (item) => item.id !== action.payload
       );
     },
+    sentemail(state,action){
+      state.sentemaildata = action.payload;
+    },
+    deletesentmail(state, action){
+      state.sentemaildata= state.sentemaildata.filter(
+        (item)=> item.id !== action.payload
+      )
+    }
   },
 });
 

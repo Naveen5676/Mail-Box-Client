@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 
 const SidePanel = () => {
   let count = 0;
@@ -27,17 +28,20 @@ const SidePanel = () => {
                 class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                 id="menu"
               >
-                <li class="nav-item">
-                  <a href="#" class="nav-link align-middle px-0">
-                    <i class="fs-4 bi-house"></i>{" "}
-                    <span class="ms-1 d-none d-sm-inline">Inbox</span>
-                    <p>{count}</p>
-                  </a>
+                <li className="nav-item" style={{ marginBottom: "8px" }}>
+                  <NavLink to="/home" activeStyle={{ color: "white" }}>
+                    <i className="fs-4 bi-house"></i>{" "}
+                    <span className="ms-1 d-none d-sm-inline">
+                      Inbox {count}
+                    </span>
+                  </NavLink>
                 </li>
-                <li>
-                  <a href="#" class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-table"></i>{" "}
-                    <span class="ms-1 d-none d-sm-inline">Orders</span>
+                <li style={{ marginBottom: "8px" }}>
+                  <a href="#" className="nav-link px-0 align-middle">
+                    <NavLink to="/sent" activeStyle={{ color: "white" }}>
+                      <i className="fs-4 bi-table"></i>{" "}
+                      <span className="ms-1 d-none d-sm-inline">Sent</span>
+                    </NavLink>
                   </a>
                 </li>
                 <li>

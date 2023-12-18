@@ -3,29 +3,22 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-const InboxDetail = () => {
+
+const SentDetails =()=>{
+
   const params = useParams();
-  const emaildata = useSelector((state) => state.email.receivedemaildata);
+  const emaildata = useSelector((state) => state.email.sentemaildata);
 
   // Use find to get the exact email data based on params.item
-  const exactemaildata = emaildata.find((data) => data.id === params.inboxitemID);
-
-  // console.log("Redux state in InboxDetail:", emaildata);
-  // console.log("exactemaildata:", exactemaildata);
-  // console.log("params", params.itemID);
-
-  if (!exactemaildata) {
-    // Handle the case where no matching email is found
-    return <div>Email not found</div>;
-  }
-
-  return (
-    <Fragment>
+  const exactemaildata = emaildata.find((data) => data.id === params.sentitemID)
+    return(
+        <Fragment>
       <Container>
         <Row>
           <Col xs={12} md={12} lg={12}>
+
             <Card>
-            <h1>Received Email Details</h1>
+              <h1>Sent Email Details</h1>
               <Card.Title style={{ paddingLeft: "30px", paddingTop: "20px" }}>
                 {exactemaildata.subject}
               </Card.Title>
@@ -43,7 +36,7 @@ const InboxDetail = () => {
         </Row>
       </Container>
     </Fragment>
-  );
-};
 
-export default InboxDetail;
+    );
+}
+export default SentDetails

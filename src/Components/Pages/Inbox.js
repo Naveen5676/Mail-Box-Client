@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const Inbox = () => {
   let dispatch = useDispatch();
-  const reducerdata = useSelector((state) => state.email.receivedemaildata);
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,7 +90,7 @@ const Inbox = () => {
     )
       .then((res) => {
         if (res.ok) {
-          dispatch(emailAction.deleteemail(id));
+          dispatch(emailAction.deleteereceivedmail(id));
           alert("deleted");
         }
         if (!res.ok) {
@@ -124,7 +124,7 @@ const Inbox = () => {
                   to={`/inboxdetail/${item.id}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <Card onClick={() => messageinfoHandler(item)}>
+                  <Card  style={{ border: 'none' }} onClick={() => messageinfoHandler(item)}>
                     <Card.Body>
                       <Card.Img
                         src={item.messageread ? whitedot : bluedot}

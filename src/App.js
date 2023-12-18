@@ -6,6 +6,8 @@ import Home from "./Components/Pages/Home";
 import { Route, Switch } from "react-router-dom";
 import InboxDetail from "./Components/Pages/InboxDetail";
 import SidePanel from "./Components/Pages/SidePanel";
+import Sent from "./Components/Pages/Sent";
+import SentDetails from "./Components/Pages/SentDetails";
 
 function App() {
   return (
@@ -24,8 +26,14 @@ function App() {
               <Route path="/Home">
                 <Home />
               </Route>
-              <Route path="/inboxdetail/:itemID">
+              <Route path='/Sent'>
+                <Sent/>
+              </Route>
+              <Route path="/inboxdetail/:inboxitemID">
                 <InboxDetail />
+              </Route>
+              <Route path='/Sentdetails/:sentitemID'>
+                <SentDetails/>
               </Route>
             </Switch>
           </div>
