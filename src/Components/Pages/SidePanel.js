@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import gmaillogo from '../../Assets/gmaillogo2.png';
 
 const SidePanel = () => {
   let count = 0;
@@ -12,20 +13,21 @@ const SidePanel = () => {
       count++;
     }
   });
+  
   return (
     <Fragment>
-      <div class="container-fluid">
-        <div class="row flex-nowrap">
-          <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-              <a
-                href="/"
-                class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+      <div className="container-fluid">
+        <div className="row flex-nowrap">
+          <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+              <Link
+                to="/"
+                className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
               >
-                <span class="fs-5 d-none d-sm-inline">Menu</span>
-              </a>
+                <img src={gmaillogo} alt="Gmail Logo" className="gmail-logo" />
+              </Link>
               <ul
-                class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                 id="menu"
               >
                 <li className="nav-item" style={{ marginBottom: "8px" }}>
@@ -45,9 +47,9 @@ const SidePanel = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-people"></i>{" "}
-                    <span class="ms-1 d-none d-sm-inline">Customers</span>{" "}
+                  <a href="#" className="nav-link px-0 align-middle">
+                    <i className="fs-4 bi-people"></i>{" "}
+                    <span className="ms-1 d-none d-sm-inline">Customers</span>{" "}
                   </a>
                 </li>
               </ul>
