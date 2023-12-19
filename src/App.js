@@ -5,35 +5,37 @@ import AuthPage from "./Components/Pages/Auth-page";
 import Home from "./Components/Pages/Home";
 import { Route, Switch } from "react-router-dom";
 import InboxDetail from "./Components/Pages/InboxDetail";
-import SidePanel from "./Components/Pages/SidePanel";
+import SidePanel from "./Components/UI/SidePanel";
 import Sent from "./Components/Pages/Sent";
 import SentDetails from "./Components/Pages/SentDetails";
+import { useSelector } from "react-redux";
 
 function App() {
+  const loginingo = useSelector((state)=> state.auth.islogged)
   return (
     <Fragment>
       <Headers />
       <div className="container-fluid">
         <div className="row flex-nowrap">
-          <div className="col-auto col-md-2 col-xl-1 px-sm-2 px-0 bg-dark">
+        {loginingo &&<div className="col-auto col-md-2 col-xl-1 px-sm-2 px-0 bg-dark">
             <SidePanel />
-          </div>
+          </div>}
           <div className="col py-3">
             <Switch>
               <Route path="/Auth">
                 <AuthPage />
               </Route>
               <Route path="/Home">
-                <Home />
+                {loginingo && <Home />}
               </Route>
               <Route path='/Sent'>
-                <Sent/>
+                {loginingo && <Sent/>}
               </Route>
               <Route path="/inboxdetail/:inboxitemID">
-                <InboxDetail />
+                {loginingo && <InboxDetail />}
               </Route>
               <Route path='/Sentdetails/:sentitemID'>
-                <SentDetails/>
+                {loginingo && <SentDetails/>}
               </Route>
             </Switch>
           </div>

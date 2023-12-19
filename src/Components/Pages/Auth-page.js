@@ -4,13 +4,16 @@ import "bootstrap/dist/css/bootstrap.css";
 import signup from "../../Assets/signup2.jpg";
 import login from "../../Assets/login.jpg";
 import { useHistory } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { Authaction } from "../../Store/AuthSlice";
 const AuthPage = () => {
   const [loginsignup, setloginsignup] = useState(true);
   let enetredemail = useRef();
   let enteredpwd = useRef();
   let reenteredpwd = useRef();
   let history = useHistory();
+
+  const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -47,6 +50,7 @@ const AuthPage = () => {
           let sentemail = data.email;
           let updatedemail = sentemail.replace(/[@.]/g, "");
           localStorage.setItem("loginemail", updatedemail);
+          dispatch(Authaction.login())
         })
         .catch((err) => {
           console.log(err);

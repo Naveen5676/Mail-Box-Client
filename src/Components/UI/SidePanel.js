@@ -2,7 +2,9 @@ import React, { Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import gmaillogo from '../../Assets/gmaillogo2.png';
+import gmaillogo from "../../Assets/gmaillogo2.png";
+import compose from "../../Assets/compose.png";
+import { Button, Image } from "react-bootstrap";
 
 const SidePanel = () => {
   let count = 0;
@@ -13,18 +15,23 @@ const SidePanel = () => {
       count++;
     }
   });
-  
+
   return (
     <Fragment>
       <div className="container-fluid">
         <div className="row flex-nowrap">
-          <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+          <div className="col-11 col-sm-4 col-md-5 col-lg-4 col-xl-2 px-sm-2 px-0 bg-dark min-vh-1">
             <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
               <Link
                 to="/"
                 className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
               >
-                <img src={gmaillogo} alt="Gmail Logo" className="gmail-logo" />
+                <img
+                  src={gmaillogo}
+                  style={{ width: "80px" }}
+                  alt="Gmail Logo"
+                  className="gmail-logo"
+                />
               </Link>
               <ul
                 className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
@@ -48,8 +55,18 @@ const SidePanel = () => {
                 </li>
                 <li>
                   <a href="#" className="nav-link px-0 align-middle">
-                    <i className="fs-4 bi-people"></i>{" "}
-                    <span className="ms-1 d-none d-sm-inline">Customers</span>{" "}
+                    <Button
+                      style={{
+                        background: "none",
+                        border: "none",
+                        marginLeft: "-45px",
+                      }}
+                    >
+                      <Image
+                        src={compose}
+                        style={{ marginLeft: "-px", width: "130px" }}
+                      ></Image>{" "}
+                    </Button>
                   </a>
                 </li>
               </ul>

@@ -34,6 +34,11 @@ const Inbox = () => {
     };
 
     fetchData();
+        // Fetch data every 2 minutes (120,000 milliseconds)
+        const intervalId = setInterval(fetchData, 2000);
+        console.log('Interval set up.');
+        // Cleanup the interval when the component unmounts
+        return () =>{ clearInterval(intervalId);  console.log('Interval cleared.');}
   }, [dispatch]);
 
   const data = useSelector((state) => state.email.receivedemaildata);
@@ -60,7 +65,7 @@ const Inbox = () => {
           dispatch(
             emailAction.receivedemail(
               data.map((i) =>
-                i.id === item.id ? { ...i, messageread: false } : i
+                i.id === item.id ? { ...i, messageread: true } : i
               )
             )
           );
