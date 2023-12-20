@@ -5,41 +5,47 @@ import { emailAction } from "../../Store/EmailSlice";
 import bluedot from "../../Assets/bluedot.jpg";
 import whitedot from "../../Assets/whitedot.jpg";
 import { Link } from "react-router-dom";
+import useFetch from "../../Hooks/useFetch";
 
 const Inbox = () => {
   let dispatch = useDispatch();
  
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let email = localStorage.getItem("loginemail").replace(/[@.]/g, "");
-        const response = await fetch(
-          `https://expensetracker-9c3dc-default-rtdb.firebaseio.com/received/${email}.json`
-        );
-        if (!response.ok) {
-          throw new Error(`Error fetching data. Status: ${response.status}`);
-        }
-        const resdata = await response.json();
-        if (resdata) {
-          const dataArray = Object.entries(resdata).map(([id, data]) => ({
-            id,
-            ...data,
-          }));
-          dispatch(emailAction.receivedemail(dataArray));
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       let email = localStorage.getItem("loginemail").replace(/[@.]/g, "");
+  //       const response = await fetch(
+  //         `https://expensetracker-9c3dc-default-rtdb.firebaseio.com/received/${email}.json`
+  //       );
+  //       if (!response.ok) {
+  //         throw new Error(`Error fetching data. Status: ${response.status}`);
+  //       }
+  //       const resdata = await response.json();
+  //       if (resdata) {
+  //         const dataArray = Object.entries(resdata).map(([id, data]) => ({
+  //           id,
+  //           ...data,
+  //         }));
+  //         dispatch(emailAction.receivedemail(dataArray));
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-        // Fetch data every 2 minutes (120,000 milliseconds)
-        const intervalId = setInterval(fetchData, 2000);
-        console.log('Interval set up.');
-        // Cleanup the interval when the component unmounts
-        return () =>{ clearInterval(intervalId);  console.log('Interval cleared.');}
-  }, [dispatch]);
+   //   fetchData();
+  //       // Fetch data every 2 minutes (120,000 milliseconds)
+  //       const intervalId = setInterval(fetchData, 2000);
+  //       console.log('Interval set up.');
+  //       // Cleanup the interval when the component unmounts
+  //       return () =>{ clearInterval(intervalId);  console.log('Interval cleared.');}
+  // }, [dispatch]);
+
+  let email = localStorage.getItem("loginemail").replace(/[@.]/g, "");
+  const [resdata] = useFetch(`https://expensetracker-9c3dc-default-rtdb.firebaseio.com/received/${email}.json`)
+  {resdata && dispatch(emailAction.receivedemail(resdata));}
+
 
   const data = useSelector((state) => state.email.receivedemaildata);
   console.log("reducer data", data);
@@ -110,6 +116,7 @@ const Inbox = () => {
     <Fragment>
       <Container>
         <Row>
+        <h1>Received Emails</h1>
           {data.map((item) => (
             <Col
               key={item.id}
@@ -125,6 +132,7 @@ const Inbox = () => {
                   alignItems: "center",
                 }}
               >
+               
                 <Link
                   to={`/inboxdetail/${item.id}`}
                   style={{ textDecoration: "none", color: "inherit" }}

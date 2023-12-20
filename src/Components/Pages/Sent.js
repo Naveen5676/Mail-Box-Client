@@ -55,6 +55,7 @@ const Sent = () => {
     <Fragment>
       <Container>
         <Row>
+        <h1>Sent Emails</h1>
           {sentdata.map((item) => (
             <Col
               key={item.id}

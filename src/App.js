@@ -9,12 +9,14 @@ import SidePanel from "./Components/UI/SidePanel";
 import Sent from "./Components/Pages/Sent";
 import SentDetails from "./Components/Pages/SentDetails";
 import { useSelector } from "react-redux";
+import ComposeModal from "./Components/Pages/ComposeModal";
 
 function App() {
   const loginingo = useSelector((state)=> state.auth.islogged)
   return (
     <Fragment>
       <Headers />
+      <ComposeModal/>
       <div className="container-fluid">
         <div className="row flex-nowrap">
         {loginingo &&<div className="col-auto col-md-2 col-xl-1 px-sm-2 px-0 bg-dark">

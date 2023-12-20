@@ -1,20 +1,27 @@
 import React, { Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import gmaillogo from "../../Assets/gmaillogo2.png";
 import compose from "../../Assets/compose.png";
 import { Button, Image } from "react-bootstrap";
+import { Modalaction } from "../../Store/ModalSlice";
 
 const SidePanel = () => {
   let count = 0;
   const emaildata = useSelector((state) => state.email.receivedemaildata);
+
+  const dispatch = useDispatch();
 
   emaildata.forEach((data) => {
     if (data.messageread === false) {
       count++;
     }
   });
+
+  const composebtnHandler = () => {
+    dispatch(Modalaction.setTrue());
+  };
 
   return (
     <Fragment>
@@ -54,20 +61,19 @@ const SidePanel = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="nav-link px-0 align-middle">
+                 
                     <Button
-                      style={{
-                        background: "none",
-                        border: "none",
-                        marginLeft: "-45px",
-                      }}
+                      variant="link"
+                      style={{ marginLeft: "-45px" }}
+                      onClick={composebtnHandler}
                     >
                       <Image
                         src={compose}
-                        style={{ marginLeft: "-px", width: "130px" }}
+                        style={{ width: "130px" }}
+                        alt="Compose"
                       ></Image>{" "}
                     </Button>
-                  </a>
+                  
                 </li>
               </ul>
               <hr />
