@@ -23,6 +23,8 @@ const SidePanel = () => {
     dispatch(Modalaction.setTrue());
   };
 
+  const email = localStorage.getItem('loginemail')
+
   return (
     <Fragment>
       <div className="container-fluid">
@@ -74,6 +76,9 @@ const SidePanel = () => {
                       ></Image>{" "}
                     </Button>
                   
+                </li>
+                <li>
+        <h5 style={{fontSize:'12px', marginLeft: "-25px"}}>{email}</h5>
                 </li>
               </ul>
               <hr />

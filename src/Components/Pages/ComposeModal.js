@@ -7,16 +7,19 @@ import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { Authaction } from "../../Store/AuthSlice";
 import { Modalaction } from "../../Store/ModalSlice";
+import { EditorState } from "draft-js";
 
 const ComposeModal = () => {
   let sentemail = useRef();
   let subject = useRef();
+  let body= useRef();
 
   const composebtnstate = useSelector((state) => state.modal.composebtn);
   console.log(composebtnstate);
   const dispatch = useDispatch();
 
-  const [editorState, setEditorState] = useState("");
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
   //console.log(editorState);
 
   const mailSubmitHandler = (e) => {
@@ -32,7 +35,7 @@ const ComposeModal = () => {
       sentfromemail: localStorage.getItem("loginemail"),
       email: sentemail.current.value,
       subject: subject.current.value,
-      message: message,
+      message: body.current.value,
       messageread: false,
     };
 
@@ -78,7 +81,8 @@ const ComposeModal = () => {
   };
 
   function MyVerticallyCenteredModal(props) {
-    const modalclosebtnHandler = () => {
+    const modalclosebtnHandler = (e) => {
+      e.preventDefault();
       props.onHide();
       dispatch(Modalaction.setFalse());
     };
@@ -109,12 +113,13 @@ const ComposeModal = () => {
               <Form.Control type="text" placeholder="Subject" ref={subject} />
             </Form.Group>
             <Form.Group controlId="editorField">
-              <Editor
+              {/* <Editor
                 editorState={editorState}
                 onEditorStateChange={(newEditorState) =>
                   setEditorState(newEditorState)
                 }
-              />
+              /> */}
+              <textarea ref={body} placeholder="Body" style={{ width: '100%', height: '200px' }}></textarea>
             </Form.Group>
             <Button variant="primary" type="submit">
               Send
